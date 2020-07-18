@@ -6,7 +6,7 @@
     margin: 5px;
 }
 
-#second, .center{
+#second{
     width: 50px;
     height: 50px;
     background-color: gold;
@@ -19,4 +19,26 @@
     background-color: gold;
     --anchor-bottom: parent verticalCenter;
     --anchor-left: parent left;
+}
+.square:nth-child(even) .center{
+    width: 50px;
+    height: 50px;
+    background-color: gold;
+    --anchor-verticalCenter: parent verticalCenter;
+    --anchor-left: parent left;
+}
+.square:nth-child(odd) .center{
+    width: 50px;
+    height: 50px;
+    background-color: gold;
+    --anchor-verticalCenter: parent verticalCenter;
+    --anchor-right: parent right;
+}
+
+.center-inner{
+    width:  10px;
+    height: 10px;
+    --anchor-verticalCenter: parent verticalCenter;
+    --anchor-horizontalCenter: parent horizontalCenter;
+    background-color: aquamarine;
 }
