@@ -45,38 +45,49 @@ function anchorTo(element,anchor,anchorElement,anchor2){
             element.style.left = pos + "px"
             return 0
     }
+    return 1;
 }
 
 function parseAnchor(anchor){
     anchor = anchor.trim()
-    let list = anchor.split(" ");
+    let list = anchor.split(" ")
     return {
         target: list[0],
         anchor: list[1]
     }
 }
 function getCustomCssAttribute(element, attribut){
-    const style = window.getComputedStyle(element);
-    const value = style.getPropertyValue(attribut);
+    const style = window.getComputedStyle(element)
+    const value = style.getPropertyValue(attribut)
     return value
 }
 
-document.addEventListener('DOMContentLoaded', function (v) {
+function render() {
     let list = document.getElementsByClassName("sailingShip");
-    let anchors = ["--anchor-left", "--anchor-right", "--anchor-bottom", "--anchor-top", "--anchor-verticalCenter", "--anchor-horizontalCenter"];
+    let anchors = ["--anchor-left", "--anchor-right", "--anchor-bottom", "--anchor-top",
+        "--anchor-verticalCenter", "--anchor-horizontalCenter"];
     for(let element of list) {
-        anchors.forEach(function (anchorElement) {
-            const anchorstring =  getCustomCssAttribute(element,anchorElement)
+        anchors.forEach(function (anchorName) {
+            const anchorstring =  getCustomCssAttribute(element,anchorName)
             if(anchorstring !== null && anchorstring.length > 0){
                 let anchor = parseAnchor(anchorstring);
-                let elementAnchor = anchorElement.split("-")
+                let elementAnchor = anchorName.split("-")
                 let harbor = null;
-                if(anchor.target.startsWith("#")){
-                    harbor = document.getElementById(anchor.target.substr(1))
+                if(anchor.target === "parent"){
+                    harbor = element.parentNode
+                } else {
+                    harbor = document.querySelector(anchor.target)
                 }
-                console.log(anchor.target)
-                anchorTo(element,elementAnchor[elementAnchor.length-1],harbor,anchor.anchor);
+                if(harbor !== null){
+                    anchorTo(element,elementAnchor[elementAnchor.length-1],harbor,anchor.anchor);
+                }
+
             }
         } )
     }
-});
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    render()
+    setInterval(render, 200)
+} );
