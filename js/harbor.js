@@ -72,7 +72,6 @@ function anchorTo(element, anchor, anchorElement, anchor2, positioning) {
                 return 0
         }
     }
-
     return 1;
 }
 

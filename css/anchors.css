@@ -11,7 +11,7 @@
     animation-delay: 2s;
     position: absolute;
     left: 0;
-    top: 150px;
+    top: 250px;
 }
 #second{
     width: 50px;
@@ -25,8 +25,8 @@
     width: 20px;
     height: 20px;
     background-color: gold;
-    --anchor-bottom: parent verticalCenter;
-    --anchor-left: parent left;
+    --anchor-top: parent bottom;
+    --anchor-right: parent left;
 }
 .square:nth-child(even) .center{
     width: 50px;
@@ -51,9 +51,9 @@
     background-color: aquamarine;
 }
 @keyframes example {
-    0%   {background-color:red; left:0px; top:150px;}
-    25%  {background-color:yellow; left:200px; top:150px;}
-    50%  {background-color:blue; left:200px; top:350px;}
-    75%  {background-color:green; left:0px; top:350px;}
-    100% {background-color:red; left:0px; top:150px;}
+    0%   {background-color:red; left:0px; top:250px;}
+    25%  {background-color:yellow; left:200px; top:350px;}
+    50%  {background-color:blue; left:200px; top:450px;}
+    75%  {background-color:green; left:0px; top:450px;}
+    100% {background-color:red; left:0px; top:250px;}
 }
