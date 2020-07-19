@@ -4,6 +4,7 @@
 The main idea is to provide anchor positioning similar to QML.
 It means that you can describe the position of an element relative to another.
 Like the top of this element should be in the vertical center of another element.
+This is an alternative way of positioning elements in relation to other elements.
 
 ## How do I use it.
 
@@ -16,7 +17,20 @@ So simply include the harbor.js file in your project and start using it.
 Positioning in CSS is cumbersome compared to most desktop frameworks,
 this tries to make it a bit easier. And to praise the God Emperor of Mankind.
 
-# Example
+## Rules
+
+* You may only define on anchor per dimension
+  * The width and height cannot yet be determined by anchors.
+  Just two points of the rectangle or its center.
+* Anchors are written into custom css attributes
+* Elements use position fixed or if defined absolute
+* movement of objects does not redraw fixed elements. 
+  Absolutely positioned elements behave might according to normal css rules. 
+* Praise the emperor
+
+ 
+
+## Example
 Harbor.js uses custom css properties to extend CSS.
 
 ````
