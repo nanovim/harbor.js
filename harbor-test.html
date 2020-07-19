@@ -7,6 +7,20 @@
     <script src="js/harbor.js"></script>
 </head>
 <body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let options = {
+            childList: true,
+            attributes: true,
+            characterData: true
+        };
+        var mutationObserver = new MutationObserver(function (mutations) {
+            mutations.forEach(function (mutation) {
+                console.log(mutation);
+            });
+        });
+    });
+</script>
 <div id="first">
     <div id="second" class="sailingShip"></div>
 </div>
