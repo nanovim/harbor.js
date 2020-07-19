@@ -19,7 +19,32 @@ function anchorPosition(element, anchor) {
 function anchorTo(element, anchor, anchorElement, anchor2, positioning) {
     let pos1 = anchorPosition(anchorElement, anchor2)
     let rect = element.getBoundingClientRect()
-    if(typeof(positioning) === "undefined" || positioning === "fixed"){
+    if (positioning === "absolute"){
+        element.style.position = "absolute"
+        let pos;
+        switch (anchor) {
+            case "left":
+                element.style.left = "0px"
+                return 0
+            case "right":
+                element.style.right = "0px"
+                return 0
+            case "bottom":
+                element.style.bottom = "0px"
+                return 0
+            case "top":
+                element.style.top = "0px"
+                return 0
+            case "verticalCenter":
+                pos = (rect.height / 2)
+                element.style.top = pos + "px"
+                return 0
+            case "horizontalCenter":
+                pos = (rect.width / 2)
+                element.style.left = pos + "px"
+                return 0
+        }
+    }else{
         element.style.position = "fixed"
         let pos = pos1 + "px"
         switch (anchor) {
@@ -46,31 +71,6 @@ function anchorTo(element, anchor, anchorElement, anchor2, positioning) {
                 element.style.left = pos + "px"
                 return 0
         }
-    }else if (positioning === "absolute"){
-        element.style.position = "absolute"
-        let pos;
-        switch (anchor) {
-            case "left":
-                element.style.left = "0px"
-                return 0
-            case "right":
-                element.style.right = "0px"
-                return 0
-            case "bottom":
-                element.style.bottom = "0px"
-                return 0
-            case "top":
-                element.style.top = "0px"
-                return 0
-            case "verticalCenter":
-                pos = (rect.height / 2)
-                element.style.top = pos + "px"
-                return 0
-            case "horizontalCenter":
-                pos = (rect.width / 2)
-                element.style.left = pos + "px"
-                return 0
-        }
     }
 
     return 1;
@@ -80,13 +80,9 @@ function parseAnchor(anchor) {
     anchor = anchor.trim()
     let list = anchor.split(" ")
     let target = list[0];
-    if(list.length < 3){
-        list.push("fixed")
-    }
     return {
         target: target,
         anchor: list[1],
-        positioning: list[2]
     }
 }
 
@@ -96,11 +92,12 @@ function getCustomCssAttribute(element, attribut) {
     return value
 }
 
-function render() {
+function HarborJSRender() {
     let list = document.getElementsByClassName("sailingShip");
     let anchors = ["--anchor-left", "--anchor-right", "--anchor-bottom", "--anchor-top",
         "--anchor-verticalCenter", "--anchor-horizontalCenter"];
     for (let element of list) {
+        const positioning = getCustomCssAttribute(element, "--anchor-positioning").trim();
         anchors.forEach(function (anchorName) {
             const anchorstring = getCustomCssAttribute(element, anchorName)
             if (anchorstring !== null && anchorstring.length > 0) {
@@ -114,14 +111,12 @@ function render() {
                     harbor = document.querySelector(anchor.target)
                 }
                 if (harbor !== null) {
-                    anchorTo(element, elementAnchor[1], harbor, anchor.anchor, anchor.positioning);
+                    anchorTo(element, elementAnchor[1], harbor, anchor.anchor, positioning);
                 }
             }
         })
     }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    render()
-    setInterval(render, 2000)
-});
+document.addEventListener('DOMContentLoaded', HarborJSRender)
+window.addEventListener('resize', HarborJSRender);
