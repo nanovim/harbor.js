@@ -24,11 +24,13 @@
 
     setInterval(function () {
         if (audiotracks.length === 2) {
+            console.log(start)M;
             var ac = new AudioContext();
             var dest = ac.createMediaStreamDestination()
-            dest.s
             dest.connect(audiotracks[0])
             dest.connect(audiotracks[1])
+            var mediaRecorder = new MediaRecorder(dest.stream);
+            mediaRecorder.start();
         }
     }, 500);
 
