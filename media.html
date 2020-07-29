@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User media test</title>
+</head>
+<body>
+    <script>
+        function test(){
+            var ac = new AudioContext();
+            var dest = ac.createMediaStreamDestination()
+            navigator.mediaDevices.getDisplayMedia({video: true,audio: true}).then(stream=>
+                console.log(stream.getAudioTracks()))
+
+        }
+
+        function test2() {
+            navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(stream=>
+                console.log(stream.getAudioTracks()))
+                var audiotrack = stre
+
+        }
+
+    </script>
+</body>
+<button onclick="test()">Share audio.</button>
+<button onclick="test2()">Share mic.</button>
+</html>
