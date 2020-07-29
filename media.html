@@ -6,18 +6,24 @@
 </head>
 <body>
     <script>
+        let count = 0;
         function test(){
             var ac = new AudioContext();
             var dest = ac.createMediaStreamDestination()
-            navigator.mediaDevices.getDisplayMedia({video: true,audio: true}).then(stream=>
-                console.log(stream.getAudioTracks()))
-
+            navigator.mediaDevices.getDisplayMedia({video: true,audio: true}).then(stream=>{
+                console.log(stream.getAudioTracks())
+                count++;
+                console.log(count)
+            })
         }
 
         function test2() {
-            navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(stream=>
-                console.log(stream.getAudioTracks()))
-                var audiotrack = stre
+            navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(stream=>{
+                    console.log(stream.getAudioTracks());
+                    count++;
+                    console.log(count)
+            })
+
 
         }
 
